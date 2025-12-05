@@ -1,0 +1,276 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_b9bb0"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_onedriveforbusiness": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "rt_sharedonedriveforbusiness_19d78"
+        },
+        "api": {
+          "name": "shared_onedriveforbusiness"
+        }
+      },
+      "shared_wordonlinebusiness": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "rt_sharedwordonlinebusiness_bc3fe"
+        },
+        "api": {
+          "name": "shared_wordonlinebusiness"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "bd5e9611-ba96-4c7c-a804-b2327e20530d"
+          },
+          "type": "Request",
+          "kind": "PowerAppV2",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "title": "SurveyId",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                }
+              },
+              "required": [
+                "text"
+              ]
+            }
+          }
+        }
+      },
+      "actions": {
+        "Survey:_Get_a_row_by_ID_from_selected_environment": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "59a6c711-37a8-4ca9-99d9-9792e03eea94"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "GetItemWithOrganization",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "organization": "https://digitalbathrooms-dev.crm4.dynamics.com",
+              "entityName": "rt_housesurveies",
+              "recordId": "@triggerBody()['text']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Appointments:_Get_a_row_by_ID_from_selected_environment": {
+          "runAfter": {
+            "Survey:_Get_a_row_by_ID_from_selected_environment": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "efbd583b-aecd-482e-bfcd-4c94fa553ccd"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "GetItemWithOrganization",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "organization": "https://digitalbathrooms-dev.crm4.dynamics.com",
+              "entityName": "rt_appointment1s",
+              "recordId": "@outputs('Survey:_Get_a_row_by_ID_from_selected_environment')?['body/_rt_appointment_value']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Client:_Get_a_row_by_ID_from_selected_environment": {
+          "runAfter": {
+            "Appointments:_Get_a_row_by_ID_from_selected_environment": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "afc9b7e5-0d3d-46da-b820-ab61d6e408cc"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "GetItemWithOrganization",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "organization": "https://digitalbathrooms-dev.crm4.dynamics.com",
+              "entityName": "rt_clients",
+              "recordId": "@outputs('Appointments:_Get_a_row_by_ID_from_selected_environment')?['body/_rt_client_value']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Property:_Get_a_row_by_ID_from_selected_environment": {
+          "runAfter": {
+            "Client:_Get_a_row_by_ID_from_selected_environment": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "9559f297-7fb9-4168-83e9-f90fc4a670fa"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "GetItemWithOrganization",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "organization": "https://digitalbathrooms-dev.crm4.dynamics.com",
+              "entityName": "rt_properties",
+              "recordId": "@outputs('Survey:_Get_a_row_by_ID_from_selected_environment')?['body/_rt_property_value']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Create_file": {
+          "runAfter": {
+            "Survey_Report_Template_Word_Doc": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "37c50543-603f-4a9c-b3c4-7f2c6703a103"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_onedriveforbusiness",
+              "operationId": "CreateFile",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness"
+            },
+            "parameters": {
+              "folderPath": "/PowerAppsTemplates/Exports",
+              "name": "Test3.docx",
+              "body": "@body('Survey_Report_Template_Word_Doc')"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runtimeConfiguration": {
+            "contentTransfer": {
+              "transferMode": "Chunked"
+            }
+          }
+        },
+        "Get_a_row_by_ID_from_selected_environment": {
+          "runAfter": {
+            "Property:_Get_a_row_by_ID_from_selected_environment": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d2bf11fa-1b76-41ee-a38d-4cfd374ac573"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "GetItemWithOrganization",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "organization": "https://digitalbathrooms-dev.crm4.dynamics.com",
+              "entityName": "rt_labours",
+              "recordId": "@outputs('Survey:_Get_a_row_by_ID_from_selected_environment')?['body/_rt_labour_value']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Survey_Report_Template_Word_Doc": {
+          "runAfter": {
+            "Get_a_row_by_ID_from_selected_environment": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "01P3ZQOJBBIUDNMLM26BHJYUNRYHVT3JJD": "/PowerAppsTemplates/SurveyReportTemplate.docx",
+            "operationMetadataId": "c9856746-4bb6-4a18-b5b2-af89f9490a72"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_wordonlinebusiness",
+              "operationId": "CreateFileItem",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_wordonlinebusiness"
+            },
+            "parameters": {
+              "source": "me",
+              "drive": "b!vrhbZvAQ_0-fDi5m6irtPBx6KrJM5JFKsSutDVQ56i71LCjeB3BVS5dMULi3NKdD",
+              "file": "01P3ZQOJBBIUDNMLM26BHJYUNRYHVT3JJD",
+              "dynamicFileSchema/60375802": "@outputs('Get_a_row_by_ID_from_selected_environment')?['body/rt_plastering']",
+              "dynamicFileSchema/189116220": "@outputs('Survey:_Get_a_row_by_ID_from_selected_environment')?['body/rt_meterlocation']",
+              "dynamicFileSchema/219250411": "@{outputs('Get_a_row_by_ID_from_selected_environment')?['body/rt_labour']}@{outputs('Get_a_row_by_ID_from_selected_environment')?['body/rt_plumbingexternal']}",
+              "dynamicFileSchema/364175260": "@outputs('Client:_Get_a_row_by_ID_from_selected_environment')?['body/rt_eircode']",
+              "dynamicFileSchema/406664887": "@outputs('Survey:_Get_a_row_by_ID_from_selected_environment')?['body/rt_wastesoilsystem']",
+              "dynamicFileSchema/798732428": "@outputs('Survey:_Get_a_row_by_ID_from_selected_environment')?['body/rt_centralheatingtype']",
+              "dynamicFileSchema/968810698": "@outputs('Client:_Get_a_row_by_ID_from_selected_environment')?['body/rt_clientname']",
+              "dynamicFileSchema/1162637344": "@outputs('Client:_Get_a_row_by_ID_from_selected_environment')?['body/rt_address']",
+              "dynamicFileSchema/1241143980": "@outputs('Get_a_row_by_ID_from_selected_environment')?['body/rt_electrical']",
+              "dynamicFileSchema/1356742717": "@outputs('Appointments:_Get_a_row_by_ID_from_selected_environment')?['body/rt_startdatetime']",
+              "dynamicFileSchema/1371345006": "@outputs('Get_a_row_by_ID_from_selected_environment')?['body/rt_stripout']",
+              "dynamicFileSchema/1560113617": "@outputs('Client:_Get_a_row_by_ID_from_selected_environment')?['body/rt_email']",
+              "dynamicFileSchema/1593590181": "@outputs('Get_a_row_by_ID_from_selected_environment')?['body/rt_carpenter']",
+              "dynamicFileSchema/1672057024": "@outputs('Client:_Get_a_row_by_ID_from_selected_environment')?['body/rt_phone']",
+              "dynamicFileSchema/1678025956": "@outputs('Appointments:_Get_a_row_by_ID_from_selected_environment')?['body/rt_enddatetime']",
+              "dynamicFileSchema/2016415852": "@outputs('Client:_Get_a_row_by_ID_from_selected_environment')?['body/rt_gdprconsent']",
+              "dynamicFileSchema/2106016306": "@outputs('Appointments:_Get_a_row_by_ID_from_selected_environment')?['body/rt_status']",
+              "dynamicFileSchema/2129498890": "@outputs('Client:_Get_a_row_by_ID_from_selected_environment')?['body/rt_clientname']",
+              "dynamicFileSchema/-439911849": "@outputs('Survey:_Get_a_row_by_ID_from_selected_environment')?['body/rt_status']",
+              "dynamicFileSchema/-1911989123": "@outputs('Survey:_Get_a_row_by_ID_from_selected_environment')?['body/rt_surveyidentifier']",
+              "dynamicFileSchema/-1323267376": "@outputs('Survey:_Get_a_row_by_ID_from_selected_environment')?['body/rt_watersupply']",
+              "dynamicFileSchema/-449789898": "@outputs('Survey:_Get_a_row_by_ID_from_selected_environment')?['body/rt_fuseboxlocation']",
+              "dynamicFileSchema/-321816918": "@outputs('Survey:_Get_a_row_by_ID_from_selected_environment')?['body/rt_gasboilermetersize10sq']",
+              "dynamicFileSchema/-2135156346": "@outputs('Survey:_Get_a_row_by_ID_from_selected_environment')?['body/rt_yearssincerewire']",
+              "dynamicFileSchema/-222832996": "@outputs('Get_a_row_by_ID_from_selected_environment')?['body/rt_plumbinginternal']",
+              "dynamicFileSchema/-1082988289": "@outputs('Get_a_row_by_ID_from_selected_environment')?['body/rt_electrical']",
+              "dynamicFileSchema/-1011059841": "@outputs('Get_a_row_by_ID_from_selected_environment')?['body/rt_outside']",
+              "dynamicFileSchema/-252745573": "@outputs('Get_a_row_by_ID_from_selected_environment')?['body/rt_tiling']",
+              "dynamicFileSchema/-81060987": "@outputs('Get_a_row_by_ID_from_selected_environment')?['body/rt_finish']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}
