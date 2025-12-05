@@ -1,0 +1,111 @@
+<ImportExportXml version="9.2.25104.160" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.25104.160" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.25104.00160">
+  <SolutionManifest>
+    <UniqueName>DigitalBathrooms</UniqueName>
+    <LocalizedNames>
+      <LocalizedName description="Digital Bathrooms" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions />
+    <Version>0.1.0.5</Version>
+    <Managed>0</Managed>
+    <Publisher>
+      <UniqueName>rochforttechnology</UniqueName>
+      <LocalizedNames>
+        <LocalizedName description="Rochfort Technology" languagecode="1033" />
+      </LocalizedNames>
+      <Descriptions>
+        <Description description="Publisher for Digital Bathrooms Solution" languagecode="1033" />
+      </Descriptions>
+      <EMailAddress xsi:nil="true"></EMailAddress>
+      <SupportingWebsiteUrl xsi:nil="true"></SupportingWebsiteUrl>
+      <CustomizationPrefix>rt</CustomizationPrefix>
+      <CustomizationOptionValuePrefix>12626</CustomizationOptionValuePrefix>
+      <Addresses>
+        <Address>
+          <AddressNumber>1</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+        <Address>
+          <AddressNumber>2</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+      </Addresses>
+    </Publisher>
+    <RootComponents>
+      <RootComponent type="1" schemaName="rt_appointment" behavior="0" />
+      <RootComponent type="1" schemaName="rt_appointment1" behavior="0" />
+      <RootComponent type="1" schemaName="rt_auditlog" behavior="0" />
+      <RootComponent type="1" schemaName="rt_client" behavior="0" />
+      <RootComponent type="1" schemaName="rt_client1" behavior="0" />
+      <RootComponent type="1" schemaName="rt_communicationlog" behavior="0" />
+      <RootComponent type="1" schemaName="rt_housesurvey" behavior="0" />
+      <RootComponent type="1" schemaName="rt_labour" behavior="0" />
+      <RootComponent type="1" schemaName="rt_lead" behavior="0" />
+      <RootComponent type="1" schemaName="rt_lead1" behavior="0" />
+      <RootComponent type="1" schemaName="rt_photo" behavior="0" />
+      <RootComponent type="1" schemaName="rt_property" behavior="0" />
+      <RootComponent type="1" schemaName="rt_property1" behavior="0" />
+      <RootComponent type="1" schemaName="rt_quotation" behavior="0" />
+      <RootComponent type="1" schemaName="rt_sketch" behavior="0" />
+      <RootComponent type="1" schemaName="rt_test" behavior="0" />
+      <RootComponent type="1" schemaName="rt_xerocontact" behavior="0" />
+      <RootComponent type="9" schemaName="rt_leadstatus" behavior="0" />
+      <RootComponent type="9" schemaName="rt_surveystatus" behavior="0" />
+      <RootComponent type="29" id="{6905fe57-fac5-f011-bbd3-7c1e5226a43a}" behavior="0" />
+      <RootComponent type="62" schemaName="rt_Appointmentsdfef5c31" behavior="0" />
+      <RootComponent type="62" schemaName="rt_Surveyadminw38af9b1c" behavior="0" />
+      <RootComponent type="300" schemaName="rt_surveyormydayv107102025_b5f12" behavior="0" />
+      <RootComponent type="300" schemaName="rt_surveyormyday_08c4c" behavior="0" />
+      <RootComponent type="431" schemaName="rt_photo rt_imagefile" behavior="0" />
+      <RootComponent type="432" schemaName="rt_photo" behavior="0" />
+    </RootComponents>
+    <MissingDependencies />
+  </SolutionManifest>
+</ImportExportXml>

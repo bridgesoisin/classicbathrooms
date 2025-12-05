@@ -1,0 +1,11 @@
+<aiskillconfig uniquename="ais_FormFillFieldOptOut_rt_property_rt_clientname">
+  <aiskill>FormFillFieldOptOut</aiskill>
+  <description>rt_Property - DisconClient Form fill opt out</description>
+  <entity>
+    <logicalname>rt_property</logicalname>
+  </entity>
+  <iscustomizable>1</iscustomizable>
+  <scope>1</scope>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</aiskillconfig>
